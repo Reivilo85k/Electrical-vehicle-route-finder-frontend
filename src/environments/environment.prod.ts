@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://electricalroutefinderbackend.herokuapp.com/',
+  openchargemaps: {
+    API_KEY: '',
+  }
 };

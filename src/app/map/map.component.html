@@ -1,1 +1,21 @@
-<p>map works!</p>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuq7z1fSuVu56IXnqL9_XjjSr7RzWT1ec"></script>
+<div><button [routerLink]="''">Home</button></div>
+
+<div id="floating-panel" >
+  <b>Start: </b>
+  <input id="start" type="text" value="Nantes">
+  <b> End: </b>
+  <input id="end" type="text" value="Tallinn">
+  <b> Vehicle: </b>
+  <select id="vehicle" value="Choose a vehicle">
+    <!--option *ngFor="let eVehicle of user.eVehicles" [value]="eVehicle"> {{eVehicle.name}} </option-->
+    <option> Choose a vehicle </option>
+    <!--option [value]="user.id" [routerLink]="['/add-new-car', user.id]"> Add Your Own Car </option-->
+  </select>
+  <!--a [routerLink]="['/add-new-car', user.id]"> Add your own vehicle </a-->
+  <input id="submit" type="button" value="GO" />
+</div>
+<div #map id ='map'></div>
+&nbsp
+<div id="warnings-panel"></div>
