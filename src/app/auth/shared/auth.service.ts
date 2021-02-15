@@ -8,9 +8,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
-    return this.http.post('http://localhost:8080/api/auth/signup', signupRequestPayload);
+    return this.httpClient.post('http://localhost:8080/api/auth/signup',
+      signupRequestPayload, { responseType: 'text' });
   }
 }

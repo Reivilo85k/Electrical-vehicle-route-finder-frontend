@@ -30,16 +30,14 @@ export class SignUpComponent implements OnInit {
   }
 
   signup() {
-    // @ts-ignore
     this.signupRequestPayload.username = this.signupForm.get('username').value;
-    // @ts-ignore
     this.signupRequestPayload.email = this.signupForm.get('email').value;
-    // @ts-ignore
     this.signupRequestPayload.password = this.signupForm.get('password').value;
 
     this.authService.signup(this.signupRequestPayload).subscribe(() => {
       console.log('Signup Successful');
-    }, () => {
+    }, error => {
+      console.log(error);
       console.log('Signup Failed');
     });
   }
