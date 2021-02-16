@@ -9,7 +9,7 @@
   <input id="end" type="text" value="Tallinn">
   <b> Vehicle: </b>
   <select id="vehicle" value="Choose a vehicle">
-    <!--option *ngFor="let eVehicle of user.eVehicles" [value]="eVehicle"> {{eVehicle.name}} </option-->
+    <option *ngFor="let vehicle of vehicles" [value]="vehicle"> {{vehicle.brand + ' ' + vehicle.model}} </option>
     <option> Choose a vehicle </option>
     <!--option [value]="user.id" [routerLink]="['/add-new-car', user.id]"> Add Your Own Car </option-->
   </select>

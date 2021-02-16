@@ -1,6 +1,9 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {environment} from '../../environments/environment';
+import {VehicleModel} from '../shared/vehicle-model';
+import {VehicleService} from '../shared/vehicle.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -12,9 +15,10 @@ export class MapComponent implements OnInit{
   @ViewChild('map') mapElement: any;
   map: google.maps.Map;
   id: number;
+  vehicles: Array<VehicleModel> = [];
 
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(@Inject(DOCUMENT) private document: Document, private vehicleService: VehicleService) {
     this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
   }
 
@@ -30,9 +34,11 @@ export class MapComponent implements OnInit{
 
   ngOnInit(): void {
     this.initMap();
+    this.populateCarSelection()
   }
 
   populateCarSelection(): void{
+    this.vehicleService.getAllVehicles().subscribe(data => this.vehicles = data)
   }
 
   // ############# Map initialization #######################################
