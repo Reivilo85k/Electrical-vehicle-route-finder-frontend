@@ -363,7 +363,7 @@ export class MapComponent implements OnInit{
 
     for (let x = waypoints.length - 1; x >= 0; x--) {
       // @ts-ignore
-      if (this.calculateDistance(waypoints[x], lastCheckpoint) > (vehicle.status * vehicle.consumption)){
+      if (this.calculateDistance(waypoints[x], lastCheckpoint) > (vehicle.range)){
         waypoints.splice(x, 1);
       }
     }
@@ -382,8 +382,6 @@ export class MapComponent implements OnInit{
     }
     return waypoints[0];
   }
-
-
 
   setRequest = () => {
     // prepares the request sent to the Directions service
@@ -408,13 +406,11 @@ export class MapComponent implements OnInit{
   compareVehicleCapacityToDistance(vehicle, p1): boolean {
     // Checks if the distance to destination is greater than the vehicle capacity
     // @ts-ignore
-    if (this.calculateDistance(p1, this.end) > (vehicle.status * vehicle.consumption)){
+    if (this.calculateDistance(p1, this.end) > (vehicle.range)){
       return false;
     }
     return true;
   }
-
-
 
   calculateDistance(p1, p2): number {
     // Uses the Google geometry library to calculate distance between two Markers
