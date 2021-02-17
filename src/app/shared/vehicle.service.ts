@@ -14,3 +14,4 @@ export class VehicleService {
     return this.httpClient.get<Array<VehicleModel>>('http://localhost:8080/api/vehicle');
   }
 }
+

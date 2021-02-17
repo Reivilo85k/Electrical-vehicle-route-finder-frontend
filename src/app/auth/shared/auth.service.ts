@@ -6,6 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { LoginRequestPayload } from '../login/login-request.payload';
 import { LoginResponse } from '../login/login-response.payload';
 import { map, tap } from 'rxjs/operators';
+import {CreateVehicleRequestPayload} from '../../create-vehicle/create-vehicle-request.payload';
 
 @Injectable({
   providedIn: 'root'

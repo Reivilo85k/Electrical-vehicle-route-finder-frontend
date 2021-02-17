@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ToastrModule } from 'ngx-toastr';
 import {NgxWebstorageModule} from "ngx-webstorage";
+import { CreateVehicleComponent } from './create-vehicle/create-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {NgxWebstorageModule} from "ngx-webstorage";
     HeaderComponent,
     MapComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CreateVehicleComponent
   ],
   imports: [
     BrowserModule,

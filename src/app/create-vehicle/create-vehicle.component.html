@@ -1,0 +1,63 @@
+<div class="create-vehicle-section">
+  <div class="row justify-content-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header" style="text-align: center">
+          <h4>Register</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="createVehicleForm" (ngSubmit)="createVehicle()">
+            <div class="form-group row">
+              <label for="brand" class="col-md-4 col-form-label text-md-right">Brand</label>
+              <div class="col-md-6">
+                <input type="text" [formControlName]="'brand'" id="brand" class="form-control" name="brand">
+                <span *ngIf="!createVehicleForm.get('brand').valid && createVehicleForm.get('brand').touched" class="help-block">Please enter a valid brand name</span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">Model</label>
+              <div class="col-md-6">
+                <input type="text" [formControlName]="'model'" class="form-control">
+                <span *ngIf="!createVehicleForm.get('model').valid && createVehicleForm.get('model').touched" class="help-block">Please enter a valid username</span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="model" class="col-md-4 col-form-label text-md-right">Capacity (in KiloWatts)</label>
+              <div class="col-md-6">
+                <input type="text" [formControlName]="'capacity'" id="model" class="form-control" name="model">
+                <span *ngIf="!createVehicleForm.get('capacity').valid && createVehicleForm.get('capacity').touched" class="help-block">Please enter a valid capacity</span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="consumption" class="col-md-4 col-form-label text-md-right">Consumption (in Kilometers per KiloWatts)</label>
+              <div class="col-md-6">
+                <input type="text" [formControlName]="'consumption'" id="consumption" class="form-control" name="consumption">
+                <span *ngIf="!createVehicleForm.get('consumption').valid && createVehicleForm.get('consumption').touched" class="help-block">Please enter a valid consumption</span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="range" class="col-md-4 col-form-label text-md-right">Maximum travel range (in Kilometers)</label>
+              <div class="col-md-6">
+                <input type="text" [formControlName]="'range'" id="range" class="form-control" name="range">
+                <span *ngIf="!createVehicleForm.get('range').valid && createVehicleForm.get('range').touched" class="help-block">Please enter a valid travel range</span>
+              </div>
+            </div>
+
+            <span class="col-md-6 offset-md-4">
+              <button type="submit" class="create-vehicle">
+                Register
+              </button>
+              <span style="padding-left: 15px">Existing user? <a routerLink="/login">Log In</a></span>
+            </span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
