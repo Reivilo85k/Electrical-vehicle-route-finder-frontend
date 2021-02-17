@@ -3,18 +3,20 @@
 <div><button [routerLink]="''">Home</button></div>
 
 <div id="floating-panel" >
+  <form [formGroup]="vehicleFormGroup" (change)="selectVehicle()">
   <b>Start: </b>
   <input id="start" type="text" value="Nantes">
   <b> End: </b>
   <input id="end" type="text" value="Tallinn">
   <b> Vehicle: </b>
-  <select id="vehicle" value="Choose a vehicle">
-    <option *ngFor="let vehicle of vehicles" [value]="vehicle"> {{vehicle.brand + ' ' + vehicle.model}} </option>
-    <option> Choose a vehicle </option>
+  <select id="vehicle" value="Choose a vehicle" formControlName="vehicle">
+    <option value ="" disabled> Choose a vehicle </option>
+    <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle"> {{vehicle.brand + ' ' + vehicle.model}} </option>
     <!--option [value]="user.id" [routerLink]="['/add-new-car', user.id]"> Add Your Own Car </option-->
   </select>
-  <!--a [routerLink]="['/add-new-car', user.id]"> Add your own vehicle </a-->
-  <input id="submit" type="button" value="GO" />
+    <!--a [routerLink]="['/add-new-car', user.id]"> Add your own vehicle </a-->
+    <input id="submit" type="button" value="GO" />
+  </form>
 </div>
 <div #map id ='map'></div>
 &nbsp

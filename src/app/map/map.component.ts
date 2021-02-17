@@ -3,7 +3,9 @@ import {DOCUMENT} from '@angular/common';
 import {environment} from '../../environments/environment';
 import {VehicleModel} from '../shared/vehicle-model';
 import {VehicleService} from '../shared/vehicle.service';
-import {Observable} from 'rxjs';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-map',
@@ -16,21 +18,27 @@ export class MapComponent implements OnInit{
   map: google.maps.Map;
   id: number;
   vehicles: Array<VehicleModel> = [];
+  vehicleFormGroup: FormGroup;
 
-
-  constructor(@Inject(DOCUMENT) private document: Document, private vehicleService: VehicleService) {
-    this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
-  }
-
+  selectedVehicle;
+  vehicleSelected = false;
   mapCenter = { lat: 59.428, lng: 24.76};
   canReachDestinationWithoutRecharge = true;
-  start;
-  end;
   chargingPointsMarkers = [];
   markerArray = [];
   stopoverMarkers = [];
-  vehicle1 = {capacity: 33, status: 48, consumption: 6.6666}; // 1KW = 6.6666 Km; Capacity in KM = status*consumption;
   APIKey = environment.openchargemaps.API_KEY;
+  start;
+  end;
+
+
+  constructor(@Inject(DOCUMENT) private document: Document, private vehicleService: VehicleService,
+              private fb: FormBuilder, private toastr: ToastrService) {
+    this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
+    this.vehicleFormGroup = this.fb.group({
+      vehicle:  new FormControl(''),
+    })
+  }
 
   ngOnInit(): void {
     this.initMap();
@@ -39,6 +47,22 @@ export class MapComponent implements OnInit{
 
   populateCarSelection(): void{
     this.vehicleService.getAllVehicles().subscribe(data => this.vehicles = data)
+  }
+
+  selectVehicle() {
+    console.log('vehicle selected');
+    this.vehicleSelected = true;
+    this.toastr.success("Vehicle selected")
+    this.selectedVehicle = <VehicleModel> this.vehicleFormGroup.value.vehicle;
+    this.toastr.info("Your vehicle traveling range is "
+      + this.selectedVehicle.range + " Km. and your route and stopovers will be calculated accordingly")
+    console.log(this.selectedVehicle)
+    console.log(this.selectedVehicle.id)
+    console.log(this.selectedVehicle.brand)
+    console.log(this.selectedVehicle.model)
+    console.log(this.selectedVehicle.capacity)
+    console.log(this.selectedVehicle.consumption)
+    console.log(this.selectedVehicle.range)
   }
 
   // ############# Map initialization #######################################
@@ -60,7 +84,11 @@ export class MapComponent implements OnInit{
 
     const geocoder = new google.maps.Geocoder();
     document.getElementById('submit').addEventListener('click', () => {
-      this.setupMap(geocoder, directionsRenderer, directionsService);
+      if (this.vehicleSelected) {
+        this.setupMap(geocoder, directionsRenderer, directionsService);
+      }else{
+
+      }
     });
   }
 
@@ -274,12 +302,12 @@ export class MapComponent implements OnInit{
 
     console.log('route calculation started');
 
-    if (!this.compareVehicleCapacityToDistance(this.vehicle1, this.start)) {
+    if (!this.compareVehicleCapacityToDistance(this.selectedVehicle, this.start)) {
       this.canReachDestinationWithoutRecharge = false;
     }
 
     if (this.canReachDestinationWithoutRecharge === false){
-      await this.setChargeCheckpointHandler(this.vehicle1, this.start);
+      await this.setChargeCheckpointHandler(this.selectedVehicle, this.start);
     }
 
     directionsService.route(this.setRequest(),
@@ -302,7 +330,7 @@ export class MapComponent implements OnInit{
 
     this.canReachDestinationWithoutRecharge = true;
 
-    if (!this.compareVehicleCapacityToDistance(this.vehicle1, lastStop)) {
+    if (!this.compareVehicleCapacityToDistance(this.selectedVehicle, lastStop)) {
       this.canReachDestinationWithoutRecharge = false;
     }
 
