@@ -19,6 +19,12 @@ export class HeaderComponent implements OnInit {
     this.authService.username.subscribe((data: string) => this.username = data);
     this.isLoggedIn = this.authService.isLoggedIn();
     this.username = this.authService.getUserName();
+    console.log('header', this.isLoggedIn);
   }
 
+  logout() {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.router.navigateByUrl('');
+  }
 }

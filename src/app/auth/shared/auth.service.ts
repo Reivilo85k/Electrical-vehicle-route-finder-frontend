@@ -68,6 +68,7 @@ export class AuthService {
   }
 
   getJwtToken() {
+    console.log('triggered)')
     return this.localStorage.retrieve('authenticationToken');
   }
 

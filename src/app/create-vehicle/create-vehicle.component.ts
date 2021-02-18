@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {CreateVehicleService} from './create-vehicle.service';
 import {VehicleModel} from '../shared/vehicle-model';
 import {throwError} from 'rxjs';
+import {AuthService} from '../auth/shared/auth.service';
 
 @Component({
   selector: 'app-create-vehicle',
@@ -15,10 +16,10 @@ export class CreateVehicleComponent implements OnInit {
 
   createVehicleForm: FormGroup;
   vehicleModel: VehicleModel;
-  registerSuccessMessage: string;
-  isError: boolean;
+  isLoggedIn: boolean;
 
-  constructor(private createVehicleService: CreateVehicleService, private router: Router, private toastr: ToastrService) {
+  constructor(private createVehicleService: CreateVehicleService, private authService : AuthService,
+              private router: Router, private toastr: ToastrService) {
     this.createVehicleForm = new FormGroup({
       brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
       model: new FormControl('', Validators.required),
@@ -32,14 +33,19 @@ export class CreateVehicleComponent implements OnInit {
       model: '',
       consumption: null,
       range: null
-    }
+    };
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
+    this.isLoggedIn = this.authService.isLoggedIn();
+    console.log('create', this.isLoggedIn)
   }
 
   createVehicle() {
-    console.log("clicked")
+    console.log(this.isLoggedIn)
+    if (this.isLoggedIn){
+    console.log('isLoggedIn',this.isLoggedIn)
     this.vehicleModel.brand = this.createVehicleForm.get('brand').value;
     this.vehicleModel.model = this.createVehicleForm.get('model').value;
     this.vehicleModel.consumption = this.createVehicleForm.get('capacity').value;
@@ -51,5 +57,8 @@ export class CreateVehicleComponent implements OnInit {
     }, error => {
       throwError(error);
       });
+  }else {
+      this.toastr.error("You need to log in to register a vehicle")
+    }
   }
 }
