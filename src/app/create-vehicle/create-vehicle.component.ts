@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {CreateVehicleResponse} from './create-vehicle-response';
 import {CreateVehicleService} from './create-vehicle.service';
 import {VehicleModel} from '../shared/vehicle-model';
 import {throwError} from 'rxjs';
@@ -16,18 +15,10 @@ export class CreateVehicleComponent implements OnInit {
 
   createVehicleForm: FormGroup;
   vehicleModel: VehicleModel;
-  createVehicleRequestPayload: CreateVehicleResponse;
   registerSuccessMessage: string;
   isError: boolean;
 
   constructor(private createVehicleService: CreateVehicleService, private router: Router, private toastr: ToastrService) {
-    this.createVehicleRequestPayload = {
-      brand: '',
-      model: '',
-      capacity: null,
-      consumption: null,
-      range: null,
-    };
     this.vehicleModel = {
       brand: '',
       capacity: null,
