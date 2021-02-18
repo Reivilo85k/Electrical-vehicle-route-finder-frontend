@@ -19,6 +19,13 @@ export class CreateVehicleComponent implements OnInit {
   isError: boolean;
 
   constructor(private createVehicleService: CreateVehicleService, private router: Router, private toastr: ToastrService) {
+    this.createVehicleForm = new FormGroup({
+      brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+      model: new FormControl('', Validators.required),
+      capacity: new FormControl('', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]),
+      consumption: new FormControl('', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]),
+      range: new FormControl('', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')])
+    });
     this.vehicleModel = {
       brand: '',
       capacity: null,
@@ -29,13 +36,6 @@ export class CreateVehicleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createVehicleForm = new FormGroup({
-      brand: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
-      model: new FormControl('', Validators.required),
-      capacity: new FormControl('', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]),
-      consumption: new FormControl('', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')]),
-      range: new FormControl('', [Validators.required, Validators.pattern('^\\d+(\\.\\d+)?$')])
-    });
   }
 
   createVehicle() {
@@ -45,7 +45,8 @@ export class CreateVehicleComponent implements OnInit {
     this.vehicleModel.consumption = this.createVehicleForm.get('capacity').value;
     this.vehicleModel.capacity = this.createVehicleForm.get('consumption').value;
     this.vehicleModel.range = this.createVehicleForm.get('range').value;
-    this.createVehicleService.create(this.vehicleModel).subscribe(data=> {
+    console.log(this.vehicleModel)
+    this.createVehicleService.createVehicle(this.vehicleModel).subscribe(()=> {
       this.toastr.success("Vehicle registered")
     }, error => {
       throwError(error);

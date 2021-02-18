@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
   signupRequestPayload: SignupRequestPayload;
