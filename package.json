@@ -5,7 +5,6 @@
     "ng": "ng",
     "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
