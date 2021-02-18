@@ -15,6 +15,7 @@ import {NgxWebstorageModule} from "ngx-webstorage";
 import { CreateVehicleComponent } from './create-vehicle/create-vehicle.component';
 import {TokenInterceptor} from './token-interceptor';
 import { SignupComponent } from './auth/sign-up/sign-up.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SignupComponent } from './auth/sign-up/sign-up.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [
     {
