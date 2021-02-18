@@ -14,7 +14,7 @@ export class VehicleService {
   constructor(private httpClient: HttpClient) {}
 
   getAllVehicles(): Observable<Array<VehicleModel>> {
-    return this.httpClient.get<Array<VehicleModel>>(this.baseUrl + '/api/vehicle');
+    return this.httpClient.get<Array<VehicleModel>>(this.baseUrl + 'api/vehicle');
   }
 }
 
