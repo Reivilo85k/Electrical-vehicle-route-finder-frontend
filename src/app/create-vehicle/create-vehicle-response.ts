@@ -1,4 +1,5 @@
-export interface CreateVehicleRequestPayload {
+export class CreateVehicleResponse {
+  id?: number;
   brand: string;
   capacity: number;
   model: string;

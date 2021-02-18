@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {CreateVehicleRequestPayload} from './create-vehicle-request.payload';
-import {Observable} from 'rxjs';
+import {CreateVehicleResponse} from './create-vehicle-response';
 import {CreateVehicleService} from './create-vehicle.service';
+import {VehicleModel} from '../shared/vehicle-model';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-create-vehicle',
@@ -14,7 +15,8 @@ import {CreateVehicleService} from './create-vehicle.service';
 export class CreateVehicleComponent implements OnInit {
 
   createVehicleForm: FormGroup;
-  createVehicleRequestPayload: CreateVehicleRequestPayload;
+  vehicleModel: VehicleModel;
+  createVehicleRequestPayload: CreateVehicleResponse;
   registerSuccessMessage: string;
   isError: boolean;
 
@@ -26,6 +28,13 @@ export class CreateVehicleComponent implements OnInit {
       consumption: null,
       range: null,
     };
+    this.vehicleModel = {
+      brand: '',
+      capacity: null,
+      model: '',
+      consumption: null,
+      range: null
+    }
   }
 
   ngOnInit() {
@@ -40,12 +49,15 @@ export class CreateVehicleComponent implements OnInit {
 
   createVehicle() {
     console.log("clicked")
-    this.createVehicleRequestPayload.brand = this.createVehicleForm.get('brand').value;
-    this.createVehicleRequestPayload.model = this.createVehicleForm.get('model').value;
-    this.createVehicleRequestPayload.consumption = this.createVehicleForm.get('capacity').value;
-    this.createVehicleRequestPayload.capacity = this.createVehicleForm.get('consumption').value;
-    this.createVehicleRequestPayload.range = this.createVehicleForm.get('range').value;
-
-    this.createVehicleService.create(this.createVehicleRequestPayload).subscribe();
+    this.vehicleModel.brand = this.createVehicleForm.get('brand').value;
+    this.vehicleModel.model = this.createVehicleForm.get('model').value;
+    this.vehicleModel.consumption = this.createVehicleForm.get('capacity').value;
+    this.vehicleModel.capacity = this.createVehicleForm.get('consumption').value;
+    this.vehicleModel.range = this.createVehicleForm.get('range').value;
+    this.createVehicleService.create(this.vehicleModel).subscribe(data=> {
+      this.toastr.success("Vehicle registered")
+    }, error => {
+      throwError(error);
+      });
   }
 }
