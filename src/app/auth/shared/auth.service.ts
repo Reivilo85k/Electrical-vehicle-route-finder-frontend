@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {HttpClient, HttpRequest} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { SignupRequestPayload } from '../sign-up/signup-request.payload';
 import {Observable, throwError} from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -85,12 +85,5 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.getJwtToken() != null;
-  }
-
-  addToken(req: HttpRequest<any>, jwtToken: any) {
-    return req.clone({
-      headers: req.headers.set('Authorization',
-        'Bearer ' + jwtToken)
-    });
   }
 }
