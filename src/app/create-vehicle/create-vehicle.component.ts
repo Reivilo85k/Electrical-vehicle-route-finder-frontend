@@ -48,8 +48,8 @@ export class CreateVehicleComponent implements OnInit {
     console.log('isLoggedIn',this.isLoggedIn)
     this.vehicleModel.brand = this.createVehicleForm.get('brand').value;
     this.vehicleModel.model = this.createVehicleForm.get('model').value;
-    this.vehicleModel.consumption = this.createVehicleForm.get('capacity').value;
-    this.vehicleModel.capacity = this.createVehicleForm.get('consumption').value;
+    this.vehicleModel.consumption = this.createVehicleForm.get('consumption').value;
+    this.vehicleModel.capacity = this.createVehicleForm.get('capacity').value;
     this.vehicleModel.range = this.createVehicleForm.get('range').value;
     console.log(this.vehicleModel)
     this.createVehicleService.createVehicle(this.vehicleModel).subscribe(()=> {
