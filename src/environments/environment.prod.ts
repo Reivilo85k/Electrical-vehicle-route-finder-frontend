@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://ev-route-finder-backend.herokuapp.com/',
+  baseUrl: 'https://app.ev-route-finder.olivier-laborde.com/',
   openchargemaps: {
     API_KEY: '',
   }
