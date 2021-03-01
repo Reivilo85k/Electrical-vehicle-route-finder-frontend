@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'app.ev-route-finder.olivier-laborde.com/',
+  baseUrl: 'https://app.ev-route-finder.olivier-laborde.com/',
   openchargemaps: {
     API_KEY: '',
   }
