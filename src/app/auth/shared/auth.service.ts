@@ -53,6 +53,7 @@ export class AuthService {
         this.localStorage.clear('expiresAt');
         this.localStorage.store('authenticationToken', response.authenticationToken);
         this.localStorage.store('expiresAt', response.expiresAt);
+        console.log("JwtToken refreshed")
       }));
   }
 
@@ -71,7 +72,7 @@ export class AuthService {
   }
 
   getJwtToken() {
-    console.log('triggered)')
+    console.log('JwtToken fetched')
     return this.localStorage.retrieve('authenticationToken');
   }
 
