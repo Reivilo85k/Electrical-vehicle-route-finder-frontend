@@ -21,7 +21,6 @@ export class TokenInterceptor implements HttpInterceptor {
       console.log("Http request handled without refresh")
       return next.handle(req);
     }
-    console.log("app detected JwtToken needs refreshing")
     const jwtToken = this.authService.getJwtToken();
 
     if (jwtToken) {
