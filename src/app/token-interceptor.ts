@@ -25,12 +25,14 @@ export class TokenInterceptor implements HttpInterceptor {
     const jwtToken = this.authService.getJwtToken();
 
     if (jwtToken) {
+      console.log("JwtToken detected")
       return next.handle(this.addToken(req, jwtToken)).pipe(catchError(error => {
         if (error instanceof HttpErrorResponse
           || error.status === 403) {
-          console.log("Error 403 and HttpErrorResponse detected")
+          console.log("Error 403 or HttpErrorResponse detected")
           return this.handleAuthErrors(req, next);
         } else {
+          console.log("unknown error")
           return throwError(error);
         }
       }));
