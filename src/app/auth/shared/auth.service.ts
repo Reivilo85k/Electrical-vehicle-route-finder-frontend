@@ -46,6 +46,7 @@ export class AuthService {
   }
 
   refreshToken() {
+    console.log("refresh token method triggered")
     return this.httpClient.post<LoginResponse>(this.baseUrl + 'api/auth/refresh/token',
       this.refreshTokenPayload)
       .pipe(tap(response => {
