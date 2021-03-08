@@ -11,7 +11,10 @@
   <b> Vehicle: </b>
   <select id="vehicle" value="Choose a vehicle" formControlName="vehicle">
     <option value ="" disabled> Choose a vehicle </option>
-    <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle"> {{vehicle.brand + ' ' + vehicle.model}} </option>
+    <option value ="" disabled> Your vehicles </option>
+    <option *ngFor="let userVehicle of userVehicles" [ngValue]="userVehicle"> {{userVehicle.brand + ' ' + userVehicle.model + ' '+ ' range: ' + userVehicle.range + ' km.'}} </option>
+    <option value ="" disabled> Default vehicles </option>
+    <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle"> {{vehicle.brand + ' ' + vehicle.model + ' '+ ' range: ' + vehicle.range + ' km.'}} </option>
     <!--option [value]="user.id" [routerLink]="['/add-new-car', user.id]"> Add Your Own Car </option-->
   </select>
     <!--a [routerLink]="['/add-new-car', user.id]"> Add your own vehicle </a-->

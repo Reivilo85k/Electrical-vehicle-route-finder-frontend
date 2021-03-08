@@ -5,4 +5,6 @@ export class VehicleModel {
   model: string;
   consumption: number;
   range: number;
+  userId: number;
+  isDefault: boolean
 }

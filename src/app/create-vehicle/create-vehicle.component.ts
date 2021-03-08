@@ -32,7 +32,9 @@ export class CreateVehicleComponent implements OnInit {
       capacity: null,
       model: '',
       consumption: null,
-      range: null
+      range: null,
+      userId: 0,
+      isDefault: false
     };
   }
 
@@ -51,6 +53,8 @@ export class CreateVehicleComponent implements OnInit {
     this.vehicleModel.consumption = this.createVehicleForm.get('consumption').value;
     this.vehicleModel.capacity = this.createVehicleForm.get('capacity').value;
     this.vehicleModel.range = this.createVehicleForm.get('range').value;
+    this.vehicleModel.userId = this.authService.getUserId();
+    this.vehicleModel.isDefault = this.authService.getIsAdmin();
     console.log(this.vehicleModel)
     this.createVehicleService.createVehicle(this.vehicleModel).subscribe(()=> {
       this.toastr.success("Vehicle registered")

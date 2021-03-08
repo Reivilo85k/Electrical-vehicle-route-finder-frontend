@@ -35,7 +35,9 @@ export class AuthService {
     return this.httpClient.post<LoginResponse>(this.baseUrl + 'api/auth/login',
       loginRequestPayload).pipe(map(data => {
       this.localStorage.store('authenticationToken', data.authenticationToken);
-      this.localStorage.store('username', data.username);
+      this.localStorage.store('username', data.username)
+      this.localStorage.store('userId', data.userId);
+      this.localStorage.store('isAdmin', data.userIsAdmin);
       this.localStorage.store('refreshToken', data.refreshToken);
       this.localStorage.store('expiresAt', data.expiresAt);
 
@@ -47,6 +49,9 @@ export class AuthService {
 
   refreshToken() {
     console.log("refresh token method triggered")
+    console.log("refresh token payload")
+    console.log("refresh token payload token", this.refreshTokenPayload.refreshToken)
+    console.log("refresh token payload username", this.refreshTokenPayload.username)
     return this.httpClient.post<LoginResponse>(this.baseUrl + 'api/auth/refresh/token',
       this.refreshTokenPayload)
       .pipe(tap(response => {
@@ -83,6 +88,14 @@ export class AuthService {
 
   getUserName() {
     return this.localStorage.retrieve('username');
+  }
+
+  getUserId() {
+    return this.localStorage.retrieve('userId');
+  }
+
+  getIsAdmin(){
+    return this.localStorage.retrieve('isAdmin')
   }
 
   isLoggedIn(): boolean {

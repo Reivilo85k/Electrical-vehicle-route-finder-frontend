@@ -5,6 +5,7 @@ import {VehicleModel} from '../shared/vehicle-model';
 import {VehicleService} from '../shared/vehicle.service';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {AuthService} from '../auth/shared/auth.service';
 
 
 @Component({
@@ -17,8 +18,10 @@ export class MapComponent implements OnInit{
   @ViewChild('map') mapElement: any;
   map: google.maps.Map;
   id: number;
+  userVehicles: Array<VehicleModel> = [];
   vehicles: Array<VehicleModel> = [];
   vehicleFormGroup: FormGroup;
+  isLoggedIn: boolean;
 
   selectedVehicle;
   vehicleSelected = false;
@@ -32,7 +35,7 @@ export class MapComponent implements OnInit{
   end;
 
 
-  constructor(@Inject(DOCUMENT) private document: Document, private vehicleService: VehicleService,
+  constructor(@Inject(DOCUMENT) private document: Document, private authService : AuthService, private vehicleService: VehicleService,
               private fb: FormBuilder, private toastr: ToastrService) {
     this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
     this.vehicleFormGroup = this.fb.group({
@@ -41,12 +44,19 @@ export class MapComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
+    this.isLoggedIn = this.authService.isLoggedIn();
+    console.log('create', this.isLoggedIn)
     this.initMap();
     this.populateCarSelection()
   }
 
   populateCarSelection(): void{
-    this.vehicleService.getAllVehicles().subscribe(data => this.vehicles = data)
+    this.vehicleService.getDefaultVehicles().subscribe(data => this.vehicles = data);
+
+    const userId = this.authService.getUserId();
+    console.log(userId);
+    this.vehicleService.getUserVehicles(userId).subscribe(data => this.userVehicles = data)
   }
 
   selectVehicle() {
