@@ -33,7 +33,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="consumption" class="col-md-4 col-form-label text-md-right">Consumption (in Kilometers per KiloWatts)</label>
+              <label for="consumption" class="col-md-4 col-form-label text-md-right">Consumption (Wh/km)</label>
               <div class="col-md-6">
                 <input type="text" [formControlName]="'consumption'" id="consumption" class="form-control" name="consumption">
                 <span *ngIf="!createVehicleForm.get('consumption').valid && createVehicleForm.get('consumption').touched" class="help-block">Please enter a valid consumption</span>
@@ -58,6 +58,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-3">
+    </div>
   </div>
 </div>

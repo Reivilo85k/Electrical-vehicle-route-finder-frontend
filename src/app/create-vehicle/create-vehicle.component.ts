@@ -55,7 +55,7 @@ export class CreateVehicleComponent implements OnInit {
     this.vehicleModel.range = this.createVehicleForm.get('range').value;
     this.vehicleModel.userId = this.authService.getUserId();
     this.vehicleModel.isDefault = this.authService.getIsAdmin();
-    console.log(this.vehicleModel)
+    console.log("Vehicle Model", this.vehicleModel)
     this.createVehicleService.createVehicle(this.vehicleModel).subscribe(()=> {
       this.toastr.success("Vehicle registered")
     }, error => {

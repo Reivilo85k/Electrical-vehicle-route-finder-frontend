@@ -4,5 +4,5 @@ export interface LoginResponse {
   expiresAt: Date;
   username: string;
   userId: number;
-  userIsAdmin: boolean
+  isAdmin: boolean
 }
