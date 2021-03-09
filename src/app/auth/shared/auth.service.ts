@@ -37,14 +37,9 @@ export class AuthService {
       this.localStorage.store('authenticationToken', data.authenticationToken);
       this.localStorage.store('username', data.username)
       this.localStorage.store('userId', data.userId);
-      console.log("data.userId", data.userId);
-
       this.localStorage.store('isAdmin', data.isAdmin);
-      console.log("data.isAdmin", data.isAdmin);
-
       this.localStorage.store('refreshToken', data.refreshToken);
       this.localStorage.store('expiresAt', data.expiresAt);
-      console.log(this.getIsAdmin())
       this.loggedIn.emit(true);
       this.username.emit(data.username);
       return true;
