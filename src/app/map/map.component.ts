@@ -405,8 +405,9 @@ export class MapComponent implements OnInit{
       }
     }
     if (waypoints[0].getPosition() === lastCheckpoint.getPosition()){
-      const errorMessage = 'Cannot calculate route : no charging point available';
-      alert(errorMessage);
+      const errorMessage = 'Cannot calculate route';
+      this.toastr.error('Cannot calculate route because somewhere along the chosen route there is a gap with no charging station');
+      this.loaderService.isLoading.next(false);
       throw Error (errorMessage);
     }
     return waypoints[0];
