@@ -22,6 +22,7 @@ export class MapComponent implements OnInit{
   vehicles: Array<VehicleModel> = [];
   vehicleFormGroup: FormGroup;
   isLoggedIn: boolean;
+  image = "../../assets/custom-marker.png";
 
   selectedVehicle;
   vehicleSelected = false;
@@ -83,12 +84,22 @@ export class MapComponent implements OnInit{
 
     const mapOptions: google.maps.MapOptions = {
       scaleControl: true,
+      // @ts-ignore
+      mapId: "1cf5e19dcdbae4f2",
       center: this.mapCenter,
       zoom: 7,
     };
     this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    const directionsRenderer = new google.maps.DirectionsRenderer({map: this.map});
+    const directionsRenderer = new google.maps.DirectionsRenderer({
+      map: this.map,
+      polylineOptions: {
+        strokeColor: "#EE02AC"
+      },
+      markerOptions: {
+        icon: this.image
+      }
+    });
 
     // const stepDisplay = new google.maps.InfoWindow();
 
@@ -163,6 +174,7 @@ export class MapComponent implements OnInit{
           const marker = new google.maps.Marker({
             map: resultsMap,
             position: results[0].geometry.location,
+            icon: this.image,
             title: elementId,
           });
           resolve(marker);
@@ -234,10 +246,9 @@ export class MapComponent implements OnInit{
   }
   createMarker(latLng): google.maps.Marker {
     // Create a marker but do not place it on the map.
-    const marker = new google.maps.Marker({
+    return new google.maps.Marker({
       position: latLng,
     });
-    return marker;
   }
 
   async createPolyline(): Promise<google.maps.Polyline> {

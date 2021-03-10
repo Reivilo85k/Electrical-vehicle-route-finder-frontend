@@ -2,10 +2,15 @@ header{
   border-radius: 1px solid;
 }
 
+.navbar{
+ background-color: #070707;
+}
+
 .reddit-text{
   font-weight: 700;
   height: 50px;
   width: 50px;
+  color: #560744;
 }
 .logo{
   text-decoration: none;
@@ -13,9 +18,9 @@ header{
 
 .login, .signup{
   background-color: transparent;
-  border-color: #0079D3;
-  color: #0079D3;
-  fill: #0079D3;
+  border-color: #560744;
+  color: #560744;
+  fill: #560744;
   border: 1px solid;
   border-radius: 4px;
   box-sizing: border-box;
@@ -31,9 +36,15 @@ header{
   opacity: 1;
 }
 .signup{
-  background-color: #0079D3;
-  border-color: #0079D3;
-  color: aliceblue;
+  background-color: #560744;
+  border-color: #560744;
+  color: #560744;
+}
+
+.sign-up{
+  color: #560744;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .signup:hover{

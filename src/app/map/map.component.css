@@ -9,12 +9,18 @@ body {
   padding: 0;
 }
 
+input{
+  color: white;
+  background-color: #1F1E1E;
+}
+
 #floating-panel {
   position: absolute;
-  top: 10px;
+  bottom: auto;
   left: 25%;
   z-index: 5;
-  background-color: #fff;
+  color: white;
+  background-color:#070707;
   border: 1px solid #999;
   text-align: center;
   font-family: "Roboto", "sans-serif";
@@ -34,21 +40,6 @@ button {
   left: 0;
   z-index: 5;
 
-  text-align: left;
-  background: #5851ff;
-  color: white;
-  margin: 8px;
-  border: none;
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 16px 20px;
-  border-radius: 2px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-  outline: 0;
-  letter-spacing: 0.04em;
-  transition: all 0.15s ease;
-  cursor: pointer;
 
 }
 
