@@ -16,6 +16,8 @@ import { CreateVehicleComponent } from './create-vehicle/create-vehicle.componen
 import {TokenInterceptor} from './token-interceptor';
 import { SignupComponent } from './auth/sign-up/sign-up.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {LoaderComponent} from './loader/loader.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MapComponent,
     HomeComponent,
     LoginComponent,
-    CreateVehicleComponent
+    CreateVehicleComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import {VehicleService} from '../shared/vehicle.service';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from '../auth/shared/auth.service';
+import {LoaderService} from '../shared/loader.service';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class MapComponent implements OnInit{
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private authService : AuthService, private vehicleService: VehicleService,
-              private fb: FormBuilder, private toastr: ToastrService) {
+              private fb: FormBuilder, private toastr: ToastrService, private loaderService: LoaderService) {
     this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
     this.vehicleFormGroup = this.fb.group({
       vehicle:  new FormControl(''),
@@ -106,6 +107,7 @@ export class MapComponent implements OnInit{
     const geocoder = new google.maps.Geocoder();
     document.getElementById('submit').addEventListener('click', () => {
       if (this.vehicleSelected) {
+        this.loaderService.isLoading.next(true);
         this.setupMap(geocoder, directionsRenderer, directionsService);
       }else{
 
@@ -336,6 +338,7 @@ export class MapComponent implements OnInit{
         if (status === 'OK') {
           directionsRenderer.setDirections(result);
           console.log('route calculation terminated');
+          this.loaderService.isLoading.next(false);
           // showSteps(result, markerArray, stepDisplay, map);
         } else {
           window.alert('Directions request failed due to ' + status);
