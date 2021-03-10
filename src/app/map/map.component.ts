@@ -62,10 +62,12 @@ export class MapComponent implements OnInit{
   }
 
   selectVehicle() {
+    this.selectedVehicle = <VehicleModel> this.vehicleFormGroup.value.vehicle;
+    console.log("selected vehicle", this.selectedVehicle)
+    if (this.selectedVehicle != ""){
     console.log('vehicle selected');
     this.vehicleSelected = true;
     this.toastr.success("Vehicle selected")
-    this.selectedVehicle = <VehicleModel> this.vehicleFormGroup.value.vehicle;
     this.toastr.info("Your vehicle traveling range is "
       + this.selectedVehicle.range + " Km. and your route and stopovers will be calculated accordingly")
     console.log(this.selectedVehicle)
@@ -75,6 +77,9 @@ export class MapComponent implements OnInit{
     console.log(this.selectedVehicle.capacity)
     console.log(this.selectedVehicle.consumption)
     console.log(this.selectedVehicle.range)
+    }else{
+      this.toastr.error("Please select a vehicle")
+    }
   }
 
   // ############# Map initialization #######################################
@@ -110,7 +115,7 @@ export class MapComponent implements OnInit{
         this.loaderService.isLoading.next(true);
         this.setupMap(geocoder, directionsRenderer, directionsService);
       }else{
-
+        this.toastr.error("Please select a vehicle")
       }
     });
   }
