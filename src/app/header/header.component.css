@@ -10,7 +10,7 @@ header{
   font-weight: 700;
   height: 50px;
   width: 50px;
-  color: #560744;
+  color: #77095d;
 }
 .logo{
   text-decoration: none;
@@ -18,9 +18,9 @@ header{
 
 .login, .signup{
   background-color: transparent;
-  border-color: #560744;
-  color: #560744;
-  fill: #560744;
+  border-color: #77095d;
+  color: #77095d;
+  fill: #77095d;
   border: 1px solid;
   border-radius: 4px;
   box-sizing: border-box;
@@ -36,13 +36,13 @@ header{
   opacity: 1;
 }
 .signup{
-  background-color: #560744;
-  border-color: #560744;
-  color: #560744;
+  background-color: #77095d;
+  border-color: #77095d;
+  color: #77095d;
 }
 
 .sign-up{
-  color: #560744;
+  color: #77095d;
   font-weight: bold;
   text-decoration: underline;
 }
